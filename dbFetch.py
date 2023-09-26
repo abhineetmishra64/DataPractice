@@ -1,4 +1,3 @@
-import configs
 import mysql.connector as sql
 from jproperties import Properties
 
@@ -23,9 +22,10 @@ cursor = connection.cursor()
 # for x in cursor:
 #     print(x)
 
-# cursor.execute("CREATE TABLE `student` (`id` int NOT NULL AUTO_INCREMENT,`name` varchar(45) NOT NULL,`age` int NOT NULL,`email` varchar(45) NOT NULL,PRIMARY KEY (`id`))")
+cursor.execute("CREATE TABLE if not exists`student` (`id` int NOT NULL AUTO_INCREMENT,`name` varchar(45) NOT NULL,`age` int NOT NULL,`email` varchar(45) NOT NULL,PRIMARY KEY (`id`))")
 
 query = "INSERT INTO student (name,age,email) VALUES (%s,%s,%s)"
 value = ("Abhineet", "25", "abhineetmishra64@gmail.com")
 cursor.execute(query,value)
 print("ROW Inserted")
+connection.commit()
