@@ -5,7 +5,7 @@ from jproperties import Properties
 spark = SparkSession.builder\
     .appName('Abhineet').getOrCreate()
 
-df_pyspark = spark.read.csv('department.csv', header=True, inferSchema=True)
+df_pyspark = spark.read.csv('Book1.csv', header=True, inferSchema=True)
 
 config = Properties()
 with open('app-config.properties', 'rb') as config_file:
@@ -20,3 +20,15 @@ connection = sql.connect(
 )
 cursor = connection.cursor()
 
+query = "SELECT * FROM department"
+cursor.execute(query)
+
+record = cursor.fetchall()
+print(record)
+
+# for i,row in df_pyspark:
+#     queryForInsert = "INSERT INTO student(name, age, email) VALUES(%s,%s,%s)"
+#     cursor.execute(queryForInsert,tuple(row))
+#     connection.commit()
+
+print(df_pyspark.show())
